@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.1.0...v1.2.0) (2025-12-17)
+
+
+### Features
+
+* agregar ruta del README.md en la actualización de la descripción de Docker Hub ([6e1f28f](https://github.com/Negri234279/cloudflare-ddns/commit/6e1f28fd80f256e38bb9289220577ed218712ad9))
+
 # [1.1.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.0.2...v1.1.0) (2025-12-17)
 
 
