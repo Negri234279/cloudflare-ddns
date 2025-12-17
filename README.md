@@ -37,15 +37,15 @@ docker pull negrii/cloudflare-ddns:latest
 ### GitHub Container Registry
 
 ```bash
-docker pull ghcr.io/negrii/cloudflare-ddns:latest
+docker pull ghcr.io/negri234279/cloudflare-ddns:latest
 ```
 
 También disponibles por versión:
 
 ```text
 v1.0.0
+v1.0.1
 v1.1.0
-v1.2.3
 ```
 
 ---
@@ -57,30 +57,26 @@ v1.2.3
 ```env
 CF_API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxx
 CF_ZONE_ID=yyyyyyyyyyyyyyyyyyyyyyyy
-CF_DNS_RECORD_ID=zzzzzzzzzzzzzzzzzz
 CF_DOMAIN=foo.bar.es
 CF_TTL=1
 CF_PROXIED=false
 CF_INTERVAL=300
+TZ=Europe/Madrid
 ```
 
-> 💡 `CF_TTL=1` significa **TTL automático** en Cloudflare.
+> 💡 `CF_TTL=1` **TTL automático** en Cloudflare.
 
 ---
 
 ### 2️⃣ `docker-compose.yml`
 
 ```yaml
-version: "3.8"
-
 services:
   cloudflare-ddns:
     image: negrii/cloudflare-ddns:latest
     container_name: cloudflare-ddns
     env_file:
       - .env
-    environment:
-      - TZ=Europe/Madrid
     restart: unless-stopped
 ```
 
@@ -129,18 +125,9 @@ Cloudflare Dashboard → tu dominio → **Overview** → Zone ID
 ---
 
 ### 🔸 DNS Record ID
+No es necesario obtener manualmente el DNS Record ID.
 
-```bash
-curl -X GET "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records?name=$CF_DOMAIN" \
-  -H "Authorization: Bearer $CF_API_TOKEN" \
-  -H "Content-Type: application/json"
-```
-
-Copia el campo:
-
-```json
-result[0].id
-```
+El contenedor recuperará automáticamente el **DNS Record ID** de Cloudflare utilizando la información de dominio y zona proporcionada en la primera ejecución, y lo almacenará internamente para futuras actualizaciones.
 
 ---
 
@@ -150,7 +137,6 @@ result[0].id
 | ------------------ | ------------------------------------------ |
 | `CF_API_TOKEN`     | Token de Cloudflare                        |
 | `CF_ZONE_ID`       | ID de la zona                              |
-| `CF_DNS_RECORD_ID` | ID del registro DNS                        |
 | `CF_DOMAIN`        | Dominio o subdominio                       |
 | `CF_TTL`           | TTL (por defecto `1` = automático)         |
 | `CF_PROXIED`       | `true` / `false` (por defecto false)       |
