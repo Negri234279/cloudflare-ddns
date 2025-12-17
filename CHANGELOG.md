@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.0.2...v1.1.0) (2025-12-17)
+
+
+### Features
+
+* agregar README.md con información del proyecto y uso ([36a93d3](https://github.com/Negri234279/cloudflare-ddns/commit/36a93d365f6febae223279cce1ede41699a7e306))
+
 ## [1.0.2](https://github.com/Negri234279/cloudflare-ddns/compare/v1.0.1...v1.0.2) (2025-12-17)
 
 
