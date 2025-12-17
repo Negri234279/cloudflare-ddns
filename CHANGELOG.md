@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/Negri234279/cloudflare-ddns/compare/v1.0.1...v1.0.2) (2025-12-17)
+
+
+### Bug Fixes
+
+* agregar actualización de descripción en Docker Hub ([f2ca1db](https://github.com/Negri234279/cloudflare-ddns/commit/f2ca1dbac8ef9d1cac03e278cb038bf917f6581f))
+
 ## [1.0.1](https://github.com/Negri234279/cloudflare-ddns/compare/v1.0.0...v1.0.1) (2025-12-17)
 
 
