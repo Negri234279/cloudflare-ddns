@@ -8,10 +8,11 @@ WORKDIR /app
 COPY update-dns.sh entrypoint.sh /app/
 RUN chmod +x update-dns.sh entrypoint.sh && chown -R ddns:ddns /app
 
-ENV TZ=Europe/Madrid
+ENV TZ="Europe/Madrid"
 ENV CF_TTL=1
 ENV CF_PROXIED=false
 ENV CF_INTERVAL=300
+ENV CF_RECORD_TYPE="A"
 
 USER ddns
 

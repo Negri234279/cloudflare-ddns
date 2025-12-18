@@ -1,0 +1,9 @@
+services:
+  cloudflare-ddns:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cloudflare-ddns
+    env_file:
+      - .env.dev.local
+    restart: unless-stopped
