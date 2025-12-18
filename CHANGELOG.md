@@ -1,3 +1,14 @@
+# [1.3.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.2.0...v1.3.0) (2025-12-18)
+
+
+### Features
+
+* actualizar .gitignore para incluir nuevas reglas de exclusión ([fbc24e8](https://github.com/Negri234279/cloudflare-ddns/commit/fbc24e89060e0ec6bb0ac621e81bf152b1983c50))
+* agregar archivo docker-compose.dev.yml para configuración de desarrollo ([4b386b0](https://github.com/Negri234279/cloudflare-ddns/commit/4b386b0cd975a2eed18d398784d4e33d9462a68b))
+* agregar recuperación automática del ID de registro DNS en el script de actualización ([79a188c](https://github.com/Negri234279/cloudflare-ddns/commit/79a188c21891ff8e5a96002e6ebceb4a0be08833))
+* agregar reglas de longitud máxima del encabezado en commitlint ([689f456](https://github.com/Negri234279/cloudflare-ddns/commit/689f45660e87d14c206c659eb8997150013b09d7))
+* agregar soporte para tipo de registro DNS configurable en el script de actualización y documentación ([d9b63b6](https://github.com/Negri234279/cloudflare-ddns/commit/d9b63b622a35253c3fe6dfc5b8d430695ccaf80e))
+
 # [1.2.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.1.0...v1.2.0) (2025-12-17)
 
 
