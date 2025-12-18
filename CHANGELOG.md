@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.3.1...v1.4.0) (2025-12-18)
+
+
+### Features
+
+* agregar argumentos de construcción y metadatos a la imagen Docker ([057ce7e](https://github.com/Negri234279/cloudflare-ddns/commit/057ce7e9480b5795861464be1be62ca5419e641d))
+
 ## [1.3.1](https://github.com/Negri234279/cloudflare-ddns/compare/v1.3.0...v1.3.1) (2025-12-18)
 
 
