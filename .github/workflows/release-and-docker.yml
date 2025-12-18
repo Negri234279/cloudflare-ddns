@@ -88,6 +88,10 @@ jobs:
             negrii/cloudflare-ddns:${{ steps.get-latest-tag.outputs.latest_tag }}
             ghcr.io/negri234279/cloudflare-ddns:latest
             ghcr.io/negri234279/cloudflare-ddns:${{ steps.get-latest-tag.outputs.latest_tag }}
+          build-args: |
+            VERSION=${{ steps.get-latest-tag.outputs.latest_tag }}
+            VCS_REF=${{ github.sha }}
+            BUILD_DATE=${{ github.event.head_commit.timestamp }}
 
       - uses: actions/checkout@v4
       

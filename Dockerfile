@@ -1,5 +1,21 @@
 FROM alpine:3.20
 
+# ---------- Build arguments (from CI) ----------
+ARG VERSION="1.0.0"
+ARG VCS_REF="unknown"
+ARG BUILD_DATE="unknown"
+
+LABEL \
+    org.opencontainers.image.title="cloudflare-ddns" \
+    org.opencontainers.image.description="Cloudflare Dynamic DNS updater" \
+    org.opencontainers.image.version="${VERSION}" \
+    org.opencontainers.image.source="https://github.com/Negri234279/cloudflare-ddns" \
+    org.opencontainers.image.url="https://github.com/Negri234279/cloudflare-ddns" \
+    org.opencontainers.image.licenses="MIT" \
+    org.opencontainers.image.created="${BUILD_DATE}" \
+    org.opencontainers.image.revision="${VCS_REF}" \
+    org.opencontainers.image.authors="Negrii"
+
 RUN addgroup -S ddns && adduser -S ddns -G ddns
 
 RUN apk add --no-cache curl bash jq tzdata
