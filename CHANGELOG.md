@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/Negri234279/cloudflare-ddns/compare/v1.4.0...v1.4.1) (2025-12-18)
+
+
+### Bug Fixes
+
+* eliminar la impresión de la respuesta de la API en el script de actualización de DNS ([3d842c7](https://github.com/Negri234279/cloudflare-ddns/commit/3d842c7238027174359ef46bb7dd4755324f90e3))
+
 # [1.4.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.3.1...v1.4.0) (2025-12-18)
 
 
