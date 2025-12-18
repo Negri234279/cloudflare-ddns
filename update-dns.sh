@@ -39,8 +39,6 @@ else
     -H "Authorization: Bearer $CF_API_TOKEN" \
     -H "Content-Type: application/json")
 
-  echo "$RESPONSE" | jq
-
   SUCCESS=$(echo "$RESPONSE" | jq -r '.success')
 
   if [[ "$SUCCESS" != "true" ]]; then
