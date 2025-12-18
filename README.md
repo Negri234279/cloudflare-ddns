@@ -58,6 +58,7 @@ v1.1.0
 CF_API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxx
 CF_ZONE_ID=yyyyyyyyyyyyyyyyyyyyyyyy
 CF_DOMAIN=foo.bar.es
+CF_RECORD_TYPE=A
 CF_TTL=1
 CF_PROXIED=false
 CF_INTERVAL=300
@@ -138,6 +139,7 @@ El contenedor recuperará automáticamente el **DNS Record ID** de Cloudflare ut
 | `CF_API_TOKEN`     | Token de Cloudflare                        |
 | `CF_ZONE_ID`       | ID de la zona                              |
 | `CF_DOMAIN`        | Dominio o subdominio                       |
+| `CF_RECORD_TYPE`   | Tipo de registro DNS (por defecto A)       |
 | `CF_TTL`           | TTL (por defecto `1` = automático)         |
 | `CF_PROXIED`       | `true` / `false` (por defecto false)       |
 | `CF_INTERVAL`      | Intervalo en segundos (por defecto 300)    |
@@ -148,13 +150,7 @@ El contenedor recuperará automáticamente el **DNS Record ID** de Cloudflare ut
 ## 🏗️ Desarrollo
 
 ```bash
-docker compose up --build
-```
-
-Rebuild sin cache:
-
-```bash
-docker compose build --no-cache
+docker compose -f 'docker-compose.dev.yml' up -d --build
 ```
 
 ---

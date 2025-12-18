@@ -68,7 +68,7 @@ RESPONSE=$(curl -s -X PATCH \
   -H "Authorization: Bearer $CF_API_TOKEN" \
   -H "Content-Type: application/json" \
   -d "{
-        \"type\": \"A\",
+        \"type\": \"$CF_RECORD_TYPE\",
         \"name\": \"$CF_DOMAIN\",
         \"content\": \"$IP\",
         \"ttl\": $CF_TTL,
