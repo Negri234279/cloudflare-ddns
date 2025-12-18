@@ -1,3 +1,11 @@
+## [1.3.1](https://github.com/Negri234279/cloudflare-ddns/compare/v1.3.0...v1.3.1) (2025-12-18)
+
+
+### Bug Fixes
+
+* agregar nueva línea al final del archivo README.md ([e99d1e4](https://github.com/Negri234279/cloudflare-ddns/commit/e99d1e42c7a81b1bb3caaef650a96345323b198d))
+* corregir traducciones y mejorar la claridad del README.md ([6ff2b25](https://github.com/Negri234279/cloudflare-ddns/commit/6ff2b2532aac9720d5477eae287fbb8d1c832960))
+
 # [1.3.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.2.0...v1.3.0) (2025-12-18)
 
 
