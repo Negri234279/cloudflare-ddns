@@ -1,32 +1,32 @@
 # 🌐 Cloudflare DDNS Docker
 
-Actualizador dinámico de DNS (DDNS) para **Cloudflare**, empaquetado en una **imagen Docker multi‑arquitectura**, optimizada para **Raspberry Pi 3, 4 y 5** y sistemas Linux x86_64.
+Dynamic DNS (DDNS) updater for **Cloudflare**, packaged as a **multi-architecture Docker image**, optimized for **Raspberry Pi 3, 4, and 5** as well as Linux x86_64 systems.
 
-Este proyecto está pensado para mantener actualizado automáticamente un registro DNS (A) de Cloudflare con tu IP pública, ideal para servidores de juegos, homelabs y conexiones sin IP estática.
+This project is designed to automatically keep a Cloudflare DNS (A) record updated with your public IP address, making it ideal for game servers, homelabs, and connections without a static IP.
 
 ---
 
-## ✨ Características
+## ✨ Features
 
-* ✅ Usa **API oficial de Cloudflare** (PATCH `/dns_records`)
-* ✅ **Multi‑arch Docker**:
+* ✅ Uses the **official Cloudflare API** (PATCH `/dns_records`)
+* ✅ **Multi-arch Docker**:
 
   * `linux/amd64` (PC / VPS)
   * `linux/arm/v7` (Raspberry Pi 3)
-  * `linux/arm64` (Raspberry Pi 4 y 5)
-* ✅ **Versionado semántico automático** (Semantic Release)
-* ✅ Publicación automática en:
+  * `linux/arm64` (Raspberry Pi 4 and 5)
+* ✅ **Automatic semantic versioning** (Semantic Release)
+* ✅ Automatic publishing to:
 
   * Docker Hub
   * GitHub Container Registry (GHCR)
-* ✅ Logs con **fecha y hora (Europe/Madrid)**
-* ✅ Usuario **no root** (mejor seguridad)
-* ✅ No hace llamadas a Cloudflare si la IP no ha cambiado
-* ✅ Muy ligero (Alpine Linux)
+* ✅ Logs with **date and time (Europe/Madrid)**
+* ✅ **Non-root user** (improved security)
+* ✅ No calls to Cloudflare if the IP has not changed
+* ✅ Very lightweight (Alpine Linux)
 
 ---
 
-## 📦 Imágenes disponibles
+## 📦 Available Images
 
 ### Docker Hub
 
@@ -40,7 +40,7 @@ docker pull negrii/cloudflare-ddns:latest
 docker pull ghcr.io/negri234279/cloudflare-ddns:latest
 ```
 
-También disponibles por versión:
+Also available by version:
 
 ```text
 v1.0.0
@@ -50,9 +50,9 @@ v1.1.0
 
 ---
 
-## 🚀 Uso rápido con Docker Compose
+## 🚀 Quick start with Docker Compose
 
-### 1️⃣ Crear `.env`
+### 1️⃣ Create `.env`
 
 ```env
 CF_API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxx
@@ -83,13 +83,13 @@ services:
 
 ---
 
-### 3️⃣ Levantar el servicio
+### 3️⃣ Start service
 
 ```bash
 docker compose up -d
 ```
 
-Ver logs:
+View logs:
 
 ```bash
 docker logs -f cloudflare-ddns
@@ -97,7 +97,7 @@ docker logs -f cloudflare-ddns
 
 ---
 
-## 📝 Ejemplo de logs
+## 📝 Example of logs
 
 ```text
 2025-03-12 02:20:43 🚀 Cloudflare DDNS running on armv7l (TZ=Europe/Madrid)
@@ -109,11 +109,11 @@ docker logs -f cloudflare-ddns
 
 ---
 
-## 🔑 Cómo obtener los datos de Cloudflare
+## 🔑 How to obtain Cloudflare data
 
 ### 🔸 API Token
 
-Crea un **API Token** con permisos:
+Create an **API Token** with permissions:
 
 * Zone → DNS → Edit
 
@@ -121,33 +121,33 @@ Crea un **API Token** con permisos:
 
 ### 🔸 Zone ID
 
-Cloudflare Dashboard → tu dominio → **Overview** → Zone ID
+Cloudflare Dashboard → your domain `bar.es` → **Overview** → Zone ID
 
 ---
 
 ### 🔸 DNS Record ID
-No es necesario obtener manualmente el DNS Record ID.
+It is not necessary to manually obtain the DNS Record ID.
 
-El contenedor recuperará automáticamente el **DNS Record ID** de Cloudflare utilizando la información de dominio y zona proporcionada en la primera ejecución, y lo almacenará internamente para futuras actualizaciones.
+The container will automatically retrieve the **DNS Record ID** from Cloudflare using the domain and zone information provided on first run, and store it internally for future updates.
 
 ---
 
-## 🧠 Variables de entorno
+## 🧠 Environment variables
 
-| Variable           | Descripción                                |
+| Variable           | Description                                |
 | ------------------ | ------------------------------------------ |
-| `CF_API_TOKEN`     | Token de Cloudflare                        |
-| `CF_ZONE_ID`       | ID de la zona                              |
-| `CF_DOMAIN`        | Dominio o subdominio                       |
-| `CF_RECORD_TYPE`   | Tipo de registro DNS (por defecto A)       |
-| `CF_TTL`           | TTL (por defecto `1` = automático)         |
-| `CF_PROXIED`       | `true` / `false` (por defecto false)       |
-| `CF_INTERVAL`      | Intervalo en segundos (por defecto 300)    |
-| `TZ`               | Zona horaria (por defecto `Europe/Madrid`) |
+| `CF_API_TOKEN`     | Cloudflare token                           |
+| `CF_ZONE_ID`       | Zone ID                                    |
+| `CF_DOMAIN`        | Domain or subdomain                        |
+| `CF_RECORD_TYPE`   | DNS record type (default A)                |
+| `CF_TTL`           | TTL (default `1` = automatic)              |
+| `CF_PROXIED`       | `true` / `false` (default false)           |
+| `CF_INTERVAL`      | Interval in seconds (default 300)          |
+| `TZ`               | Time zone (default `Europe/Madrid`)        |
 
 ---
 
-## 🏗️ Desarrollo
+## 🏗️ Development
 
 ```bash
 docker compose -f 'docker-compose.dev.yml' up -d --build
@@ -157,40 +157,40 @@ docker compose -f 'docker-compose.dev.yml' up -d --build
 
 ## 🔄 CI/CD
 
-Este proyecto utiliza **GitHub Actions** para:
+This project uses GitHub Actions for:
 
-* Versionado automático con **semantic-release**
-* Creación de **GitHub Releases**
-* Build **multi‑arch** con Docker Buildx
-* Push automático a Docker Hub y GHCR
+* Automatic versioning with semantic-release
+* Creation of GitHub Releases
+* Multi-arch builds with Docker Buildx
+* Automatic push to Docker Hub and GHCR
 
-Cada `push` a `main` genera una nueva versión si los commits lo requieren.
-
----
-
-## 🔐 Seguridad
-
-* Contenedor ejecutado como **usuario no root**
-* Token de Cloudflare nunca se guarda en la imagen
-* Uso exclusivo de HTTPS y API oficial
+Each push to main generates a new version if the commits require it.
 
 ---
 
-## 👤 Autor
+## 🔐 Security
+
+* Container run as **non-root user**
+* Cloudflare token never stored in the image
+* Exclusive use of HTTPS and official API
+
+---
+
+## 👤 Author
 
 **Negrii**
 🔗 [https://github.com/Negri234279](https://github.com/Negri234279)
 
 ---
 
-## 📄 Licencia
+## 📄 License
 
 MIT License
 
 ---
 
-## ⭐ Contribuciones
+## ⭐ Contributions
 
-Pull Requests y sugerencias son bienvenidas 🙌
+Pull requests and suggestions are welcome 🙌
 
-Si este proyecto te resulta útil, deja una ⭐ en GitHub
+If you find this project useful, leave a ⭐ on GitHub
