@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.4.1...v1.5.0) (2025-12-20)
+
+
+### Features
+
+* agregar variable APP_VERSION al entorno y actualizar su uso en entrypoint.sh ([46ac505](https://github.com/Negri234279/cloudflare-ddns/commit/46ac505566ef423a94733c366ac0eb5aad84e6fc))
+
 ## [1.4.1](https://github.com/Negri234279/cloudflare-ddns/compare/v1.4.0...v1.4.1) (2025-12-18)
 
 
