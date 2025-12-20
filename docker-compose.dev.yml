@@ -7,3 +7,9 @@ services:
     env_file:
       - .env.dev.local
     restart: unless-stopped
+    volumes:
+      - cloudflare-ddns-data:/data
+  
+volumes:
+  cloudflare-ddns-data:
+    driver: local
