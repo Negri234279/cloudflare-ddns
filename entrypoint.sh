@@ -8,7 +8,7 @@ timestamp() {
 }
 
 ARCH=$(uname -m)
-VERSION=$(grep -i 'org.opencontainers.image.version' /etc/os-release 2>/dev/null || echo "unknown")
+VERSION=${APP_VERSION:-unknown}
 
 echo "$(timestamp) 🚀 Cloudflare DDNS version $VERSION running on $ARCH (TZ=$TZ)"
 echo "$(timestamp) ⏱️ Interval: ${INTERVAL}s"
