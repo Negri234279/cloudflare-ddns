@@ -1,3 +1,11 @@
+## [1.6.1](https://github.com/Negri234279/cloudflare-ddns/compare/v1.6.0...v1.6.1) (2025-12-21)
+
+
+### Bug Fixes
+
+* add comment to ARG ci ([2666730](https://github.com/Negri234279/cloudflare-ddns/commit/2666730c60d2723bff78e9d68680fc9b4619aa9b))
+* addgroup: group 'ddns' in use ([8ce33e1](https://github.com/Negri234279/cloudflare-ddns/commit/8ce33e1a6ef346c49d3dbdebbd80f0b29a150d68))
+
 # [1.6.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.5.0...v1.6.0) (2025-12-21)
 
 
