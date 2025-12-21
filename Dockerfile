@@ -16,25 +16,16 @@ LABEL \
     org.opencontainers.image.revision="${VCS_REF}" \
     org.opencontainers.image.authors="Negrii"
 
-RUN addgroup -S ddns && adduser -S ddns -G ddns
-
-RUN apk add --no-cache curl bash jq tzdata
-
-WORKDIR /app
-COPY update-dns.sh entrypoint.sh /app/
-RUN chmod +x update-dns.sh entrypoint.sh && chown -R ddns:ddns /app
-
-RUN mkdir -p /data && chown ddns:ddns /data
-
-RUN addgroup -S ddns \
+RUN apk add --no-cache curl bash jq tzdata \
+    && addgroup -S ddns \
     && adduser -S ddns -G ddns \
-    && apk add --no-cache curl bash jq tzdata \
     && mkdir -p /app /data \
     && chown -R ddns:ddns /app /data
 
 WORKDIR /app
 COPY update-dns.sh entrypoint.sh /app/
-RUN chmod +x update-dns.sh entrypoint.sh
+RUN chmod +x update-dns.sh entrypoint.sh \
+    && chown -R ddns:ddns /app
 
 ENV TZ="Europe/Madrid"
 ENV CF_TTL=1
@@ -42,6 +33,7 @@ ENV CF_PROXIED=false
 ENV CF_INTERVAL=300
 ENV CF_RECORD_TYPE="A"
 ENV APP_VERSION=${VERSION}
+ENV STATE_DIR=/data
 
 USER ddns
 
