@@ -1,5 +1,6 @@
 FROM alpine:3.20
 
+# ---------- Build arguments (from CI) ----------
 ARG VERSION="1.0.0"
 ARG VCS_REF="unknown"
 ARG BUILD_DATE="unknown"
