@@ -1,8 +1,10 @@
 #!/bin/bash
 set -e
 
-STATE_FILE="/tmp/last_ip"
-STATE_DNS_ID_FILE="/tmp/dns_record_id"
+# State directory (persistent by default)
+STATE_DIR=${STATE_DIR:-/data}
+STATE_FILE="$STATE_DIR/last_ip"
+STATE_DNS_ID_FILE="$STATE_DIR/dns_record_id"
 
 : "${CF_TTL:=300}"
 : "${CF_PROXIED:=false}"
@@ -58,7 +60,7 @@ else
   echo "$CF_DNS_RECORD_ID" > "$STATE_DNS_ID_FILE"
 fi
 
-echo "$(timestamp) 🔄 IP changed: $LAST_IP → $IP"
+echo "$(timestamp) 🔄 IP changed: ${LAST_IP:-<none>} → $IP"
 
 # Update DNS record
 RESPONSE=$(curl -s -X PATCH \

@@ -23,6 +23,22 @@ This project is designed to automatically keep a Cloudflare DNS (A) record updat
 * ✅ **Non-root user** (improved security)
 * ✅ No calls to Cloudflare if the IP has not changed
 * ✅ Very lightweight (Alpine Linux)
+* ✅ Optional persistent state using Docker volumes (avoids false IP updates on restart)
+
+---
+
+## 🧠 Persistent state (recommended)
+
+By default, the container stores its internal state (last known IP address and DNS Record ID) inside `/data`.
+
+To avoid **false IP change detections after container restarts**, it is strongly recommended to mount a persistent volume.
+
+The following files are stored in `/data`:
+
+- `last_ip` → last public IP detected
+- `dns_record_id` → Cloudflare DNS Record ID (cached after first run)
+
+If no volume is mounted, the container will still work correctly, but this state will be lost when the container restarts.
 
 ---
 
@@ -69,7 +85,24 @@ TZ=Europe/Madrid
 
 ---
 
-### 2️⃣ `docker-compose.yml`
+### 2️⃣ Run container
+
+```bash
+docker run -d \
+  --name cloudflare-ddns \
+  --env-file .env.dev.local \
+  --restart unless-stopped \
+  -v cloudflare-ddns-data:/data \
+  negrii/cloudflare-ddns:latest
+```
+
+> 💾 The `cloudflare-ddns-data` volume ensures state persistence across container restarts.
+>  
+> Without it, the container may detect a false IP change on startup.
+
+---
+
+### 3️⃣ `docker-compose.yml`
 
 ```yaml
 services:
@@ -79,11 +112,20 @@ services:
     env_file:
       - .env
     restart: unless-stopped
+    volumes:
+      - cloudflare-ddns-data:/data
+  
+volumes:
+  cloudflare-ddns-data:
 ```
+
+> 💾 The `cloudflare-ddns-data` volume ensures state persistence across container restarts.
+>  
+> Without it, the container may detect a false IP change on startup.
 
 ---
 
-### 3️⃣ Start service
+### 4️⃣ Start service
 
 ```bash
 docker compose up -d
@@ -97,14 +139,23 @@ docker logs -f cloudflare-ddns
 
 ---
 
+### 5️⃣ 🗑️ Remove container and volume (full reset)
+
+```bash
+docker rm -f cloudflare-ddns
+docker volume rm cloudflare-ddns-data
+```
+> ⚠️ This will remove all persisted state.
+
+---
+
 ## 📝 Example of logs
 
 ```text
 2025-03-12 02:20:43 🚀 Cloudflare DDNS running on armv7l (TZ=Europe/Madrid)
 2025-03-12 02:20:43 ⏱️ Interval: 300s
+2025-03-12 02:20:43 ✅ Persistence enabled: /data is a mounted volume
 2025-03-12 02:25:43 ℹ️ IP unchanged (203.0.113.45)
-2025-03-12 02:30:44 🔄 IP changed: 203.0.113.45 → 203.0.113.99
-2025-03-12 02:30:45 ✅ DNS updated to 203.0.113.99
 ```
 
 ---
@@ -128,7 +179,7 @@ Cloudflare Dashboard → your domain `bar.es` → **Overview** → Zone ID
 ### 🔸 DNS Record ID
 It is not necessary to manually obtain the DNS Record ID.
 
-The container will automatically retrieve the **DNS Record ID** from Cloudflare using the domain and zone information provided on first run, and store it internally for future updates.
+The container will automatically retrieve the **DNS Record ID** from Cloudflare using the domain and zone information provided on first run, and store it internally.
 
 ---
 
@@ -144,6 +195,7 @@ The container will automatically retrieve the **DNS Record ID** from Cloudflare 
 | `CF_PROXIED`       | `true` / `false` (default false)           |
 | `CF_INTERVAL`      | Interval in seconds (default 300)          |
 | `TZ`               | Time zone (default `Europe/Madrid`)        |
+| `STATE_DIR`        | State directory (default `/data`)          |
 
 ---
 
