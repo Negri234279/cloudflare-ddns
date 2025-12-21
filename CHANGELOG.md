@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.5.0...v1.6.0) (2025-12-21)
+
+
+### Bug Fixes
+
+* eliminar la configuración del driver local para el volumen cloudflare-ddns-data ([6b21804](https://github.com/Negri234279/cloudflare-ddns/commit/6b21804459da6b750a642c5758b585f398b38bed))
+
+
+### Features
+
+* agregar persistencia de estado y mejorar la gestión de volúmenes en Docker ([c0958c1](https://github.com/Negri234279/cloudflare-ddns/commit/c0958c1204bba1d7f6940712ec0bb200021c16b4))
+
 # [1.5.0](https://github.com/Negri234279/cloudflare-ddns/compare/v1.4.1...v1.5.0) (2025-12-20)
 
 
