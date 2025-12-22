@@ -1,6 +1,6 @@
-FROM alpine:3.20
+FROM node:22
 
-# ---------- Build arguments (from CI) ----------
+# ---------- Build arguments ----------
 ARG VERSION="1.0.0"
 ARG VCS_REF="unknown"
 ARG BUILD_DATE="unknown"
@@ -16,16 +16,24 @@ LABEL \
     org.opencontainers.image.revision="${VCS_REF}" \
     org.opencontainers.image.authors="Negrii"
 
-RUN apk add --no-cache curl bash jq tzdata \
-    && addgroup -S ddns \
-    && adduser -S ddns -G ddns \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    bash \
+    jq \
+    tzdata \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN groupadd -r ddns && useradd -r -g ddns ddns \
     && mkdir -p /app /data \
     && chown -R ddns:ddns /app /data
 
 WORKDIR /app
-COPY update-dns.sh entrypoint.sh /app/
-RUN chmod +x update-dns.sh entrypoint.sh \
-    && chown -R ddns:ddns /app
+
+COPY package*.json src ./
+COPY entrypoint.sh /entrypoint.sh
+
+RUN npm install
+RUN chown -R ddns:ddns /app && chmod +x /entrypoint.sh
 
 ENV TZ="Europe/Madrid"
 ENV CF_TTL=1
@@ -37,4 +45,5 @@ ENV STATE_DIR=/data
 
 USER ddns
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["npm", "run", "start:prod"]

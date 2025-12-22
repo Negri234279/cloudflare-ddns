@@ -3,12 +3,19 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: cloudflare-ddns
+      args:
+        VERSION: dev
+    container_name: cloudflare-ddns-dev
     env_file:
-      - .env.dev.local
-    restart: unless-stopped
+      - .env
+    environment:
+      - NODE_ENV="dev"
+      - CHOKIDAR_USEPOLLING=true
     volumes:
+      # Código (hot reload en W11)
+      - .:/app
       - cloudflare-ddns-data:/data
+    command: npm run start:dev
   
 volumes:
   cloudflare-ddns-data:
