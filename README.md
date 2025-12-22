@@ -71,14 +71,14 @@ v1.1.0
 ### 1️⃣ Create `.env`
 
 ```env
-CF_API_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxx
-CF_ZONE_ID=yyyyyyyyyyyyyyyyyyyyyyyy
-CF_DOMAIN=foo.bar.es
-CF_RECORD_TYPE=A
+CF_API_TOKEN="xxxxxxxxxxxxxxxxxxxxxxxx"
+CF_ZONE_ID="yyyyyyyyyyyyyyyyyyyyyyyy"
+CF_DOMAIN="foo.bar.es"
+CF_RECORD_TYPE="A"
 CF_TTL=1
 CF_PROXIED=false
 CF_INTERVAL=300
-TZ=Europe/Madrid
+TZ="Europe/Madrid"
 ```
 
 > 💡 `CF_TTL=1` **TTL automático** en Cloudflare.
@@ -90,7 +90,7 @@ TZ=Europe/Madrid
 ```bash
 docker run -d \
   --name cloudflare-ddns \
-  --env-file .env.dev.local \
+  --env-file .env \
   --restart unless-stopped \
   -v cloudflare-ddns-data:/data \
   negrii/cloudflare-ddns:latest
